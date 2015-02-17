@@ -15,6 +15,7 @@
 		B21376091A93C708005EB4F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21376081A93C708005EB4F3 /* Images.xcassets */; };
 		B213760C1A93C708005EB4F3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B213760A1A93C708005EB4F3 /* LaunchScreen.xib */; };
 		B21376181A93C708005EB4F3 /* StretchHeaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B21376171A93C708005EB4F3 /* StretchHeaderTests.m */; };
+		B287BB9A1A93E2C3001EBE13 /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B287BB991A93E2C3001EBE13 /* NewsItem.m */; };
 		B28BD49D1A93D401001B7623 /* StretchHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B28BD49C1A93D401001B7623 /* StretchHeaderTableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,8 @@
 		B21376111A93C708005EB4F3 /* StretchHeaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StretchHeaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21376161A93C708005EB4F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B21376171A93C708005EB4F3 /* StretchHeaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StretchHeaderTests.m; sourceTree = "<group>"; };
+		B287BB981A93E2C3001EBE13 /* NewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsItem.h; sourceTree = "<group>"; };
+		B287BB991A93E2C3001EBE13 /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsItem.m; sourceTree = "<group>"; };
 		B28BD49B1A93D401001B7623 /* StretchHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StretchHeaderTableViewCell.h; sourceTree = "<group>"; };
 		B28BD49C1A93D401001B7623 /* StretchHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StretchHeaderTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +97,7 @@
 				B21376021A93C708005EB4F3 /* DetailViewController.h */,
 				B21376031A93C708005EB4F3 /* DetailViewController.m */,
 				B21376051A93C708005EB4F3 /* Main.storyboard */,
+				B287BB9B1A93E2CC001EBE13 /* Data Model */,
 				B21375F81A93C708005EB4F3 /* Supporting Files */,
 			);
 			path = StretchHeader;
@@ -127,6 +131,15 @@
 				B21376161A93C708005EB4F3 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B287BB9B1A93E2CC001EBE13 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				B287BB981A93E2C3001EBE13 /* NewsItem.h */,
+				B287BB991A93E2C3001EBE13 /* NewsItem.m */,
+			);
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +245,7 @@
 				B28BD49D1A93D401001B7623 /* StretchHeaderTableViewCell.m in Sources */,
 				B21375FE1A93C708005EB4F3 /* AppDelegate.m in Sources */,
 				B21376011A93C708005EB4F3 /* MasterViewController.m in Sources */,
+				B287BB9A1A93E2C3001EBE13 /* NewsItem.m in Sources */,
 				B21375FB1A93C708005EB4F3 /* main.m in Sources */,
 				B21376041A93C708005EB4F3 /* DetailViewController.m in Sources */,
 			);

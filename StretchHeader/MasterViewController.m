@@ -9,11 +9,12 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "StretchHeaderTableViewCell.h"
+#import "NewsItem.h"
 
 
 @interface MasterViewController ()
 
-@property NSMutableArray *objects;
+@property (nonatomic) NSMutableArray* newsItems;
 
 @end
 
@@ -30,18 +31,26 @@
 }
 
 
+# pragma mark UIViewController
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-	self.navigationItem.rightBarButtonItem = addButton;
-	self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+//	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+//	self.navigationItem.rightBarButtonItem = addButton;
+//	self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 
-	// Stretch header
+	// Stretch table rows to fit content
 	self.tableView.rowHeight = UITableViewAutomaticDimension;
+	
+	// Hide navigation bar
+	self.navigationController.navigationBar.hidden = YES;
+
+	// Load data model
+	self.newsItems = [NSMutableArray arrayWithArray:[self loadModel]];
 }
 
 
@@ -51,29 +60,24 @@
 }
 
 
-- (void)insertNewObject:(id)sender {
+- (BOOL)prefersStatusBarHidden {
 	
-	if (!self.objects) {
-	    self.objects = [[NSMutableArray alloc] init];
-	}
-	[self.objects insertObject:[NSDate date] atIndex:0];
-	
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+	[self setNeedsStatusBarAppearanceUpdate];
+	return YES;
 }
-
-
-#pragma mark - Segues
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	
 	if ([[segue identifier] isEqualToString:@"showDetail"]) {
 		
-	    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-	    NSDate *object = self.objects[indexPath.row];
+//	    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//		
+//	    NSDate *object = self.newsItems[indexPath.row];
+		
 	    DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-	    [controller setDetailItem:object];
+//	    [controller setDetailItem:object];
+
 	    controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
 	    controller.navigationItem.leftItemsSupplementBackButton = YES;
 	}
@@ -97,7 +101,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
-	return self.objects.count;
+	return self.newsItems.count;
 }
 
 
@@ -105,31 +109,36 @@
 	
 	StretchHeaderTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"stretchHeaderTableViewCell" forIndexPath:indexPath];
 
-	switch (arc4random_uniform(4)) {
-			
-		case 0:
-			cell.categoryLabel.text = @"World";
-			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j XXX";
-			break;
-			
-		case 1:
-			cell.categoryLabel.text = @"Europe";
-			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j  jkdf lkas sa dfh asd  sadfjkl asdfh kasd fjjkasd asfj asdfj alsdf XXX";
-			break;
-			
-		case 2:
-			cell.categoryLabel.text = @"Middle East";
-			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j XXX";
-			break;
-			
-		default:
-			cell.categoryLabel.text = @"Americas";
-			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j sad l jlas jsad sa k sa  jas jkdf lkas sa dfh asd  sadfjkl asdfh kasd fjjkasd asfj asdfj alsdf asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j sad l jlas jsad sa k sa  jas jkdf lkas sa dfh asd  sadfjkl asdfh kasd fjjkasd asfj asdfj alsdf XXX";
-			break;
-	}
+	NewsItem* newsItem = self.newsItems[indexPath.item];
 	
+	cell.categoryLabel.text = [NewsItem stringForCategory:newsItem.category];
+	cell.categoryLabel.textColor = [NewsItem colorForCategory:newsItem.category];
+	cell.headlineLabel.text = newsItem.headline;
+
+	//	switch (arc4random_uniform(4)) {
+	//
+	//		case 0:
+	//			cell.categoryLabel.text = @"World";
+	//			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j XXX";
+	//			break;
+	//
+	//		case 1:
+	//			cell.categoryLabel.text = @"Europe";
+	//			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j  jkdf lkas sa dfh asd  sadfjkl asdfh kasd fjjkasd asfj asdfj alsdf XXX";
+	//			break;
+	//
+	//		case 2:
+	//			cell.categoryLabel.text = @"Middle East";
+	//			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j XXX";
+	//			break;
+	//
+	//		default:
+	//			cell.categoryLabel.text = @"Americas";
+	//			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j sad l jlas jsad sa k sa  jas jkdf lkas sa dfh asd  sadfjkl asdfh kasd fjjkasd asfj asdfj alsdf asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j sad l jlas jsad sa k sa  jas jkdf lkas sa dfh asd  sadfjkl asdfh kasd fjjkasd asfj asdfj alsdf XXX";
+	//			break;
+	//	}
+
 	return cell;
-	
 }
 
 
@@ -144,13 +153,43 @@
 	
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		
-	    [self.objects removeObjectAtIndex:indexPath.row];
+	    [self.newsItems removeObjectAtIndex:indexPath.row];
 	    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 		
 	} else if (editingStyle == UITableViewCellEditingStyleInsert) {
 		
 	    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
 	}
+}
+
+
+# pragma mark Helpers
+
+
+//- (void)insertNewObject:(id)sender {
+//	
+//	if (!self.newsItems) {
+//		self.newsItems = [[NSMutableArray alloc] init];
+//	}
+//	[self.newsItems insertObject:[NSDate date] atIndex:0];
+//	
+//	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//}
+
+
+- (NSArray*)loadModel {
+
+	return
+	@[[NewsItem newsItemWithCategory:Category_World andHeadline:@"Climate change protests, divestments meet fossil fuels realities"],
+	  [NewsItem newsItemWithCategory:Category_Europe andHeadline:@"Scotland's 'Yes' leader says independence vote is 'once in a lifetime'"],
+	  [NewsItem newsItemWithCategory:Category_MiddleEast andHeadline:@"Airstrikes boost Islamic State, FBI director warns more hostages possible"],
+	  [NewsItem newsItemWithCategory:Category_Africa andHeadline:@"Nigeria says 70 dead in building collapse; questions S. Africa victim claim"],
+	  [NewsItem newsItemWithCategory:Category_AsiaPacific andHeadline:@"Despite UN ruling, Japan seeks backing for whale hunting"],
+	  [NewsItem newsItemWithCategory:Category_Americas andHeadline:@"Officials: FBI is tracking 100 Americans who fought alongside IS in Syria"],
+	  [NewsItem newsItemWithCategory:Category_World andHeadline:@"South Africa in $40 billion deal for Russian nuclear reactors"],
+	  [NewsItem newsItemWithCategory:Category_Europe andHeadline:@"'One million babies' created by EU student exchanges"]
+	  ];
 }
 
 
