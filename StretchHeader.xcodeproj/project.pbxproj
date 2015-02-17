@@ -87,8 +87,6 @@
 		B21375F71A93C708005EB4F3 /* StretchHeader */ = {
 			isa = PBXGroup;
 			children = (
-				B21375FC1A93C708005EB4F3 /* AppDelegate.h */,
-				B21375FD1A93C708005EB4F3 /* AppDelegate.m */,
 				B21375FF1A93C708005EB4F3 /* MasterViewController.h */,
 				B21376001A93C708005EB4F3 /* MasterViewController.m */,
 				B28BD49B1A93D401001B7623 /* StretchHeaderTableViewCell.h */,
@@ -96,8 +94,6 @@
 				B21376021A93C708005EB4F3 /* DetailViewController.h */,
 				B21376031A93C708005EB4F3 /* DetailViewController.m */,
 				B21376051A93C708005EB4F3 /* Main.storyboard */,
-				B21376081A93C708005EB4F3 /* Images.xcassets */,
-				B213760A1A93C708005EB4F3 /* LaunchScreen.xib */,
 				B21375F81A93C708005EB4F3 /* Supporting Files */,
 			);
 			path = StretchHeader;
@@ -106,6 +102,10 @@
 		B21375F81A93C708005EB4F3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B21376081A93C708005EB4F3 /* Images.xcassets */,
+				B213760A1A93C708005EB4F3 /* LaunchScreen.xib */,
+				B21375FC1A93C708005EB4F3 /* AppDelegate.h */,
+				B21375FD1A93C708005EB4F3 /* AppDelegate.m */,
 				B21375F91A93C708005EB4F3 /* Info.plist */,
 				B21375FA1A93C708005EB4F3 /* main.m */,
 			);

@@ -39,6 +39,9 @@
 	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 	self.navigationItem.rightBarButtonItem = addButton;
 	self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+
+	// Stretch header
+	self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 
@@ -86,18 +89,44 @@
 }
 
 
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+	return UITableViewAutomaticDimension;
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
 	return self.objects.count;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	StretchHeaderTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"stretchHeaderTableViewCell" forIndexPath:indexPath];
 
-	NSDate *object = self.objects[indexPath.row];
-	
-	cell.headlineLabel.text = [object description];
+	switch (arc4random_uniform(4)) {
+			
+		case 0:
+			cell.categoryLabel.text = @"World";
+			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j XXX";
+			break;
+			
+		case 1:
+			cell.categoryLabel.text = @"Europe";
+			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j  jkdf lkas sa dfh asd  sadfjkl asdfh kasd fjjkasd asfj asdfj alsdf XXX";
+			break;
+			
+		case 2:
+			cell.categoryLabel.text = @"Middle East";
+			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j XXX";
+			break;
+			
+		default:
+			cell.categoryLabel.text = @"Americas";
+			cell.headlineLabel.text = @"asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j sad l jlas jsad sa k sa  jas jkdf lkas sa dfh asd  sadfjkl asdfh kasd fjjkasd asfj asdfj alsdf asdfkj as asjdhf as ash ak as kf hsa klsa  asjk as  sa jklsa jkd ash as d jads j sad l jlas jsad sa k sa  jas jkdf lkas sa dfh asd  sadfjkl asdfh kasd fjjkasd asfj asdfj alsdf XXX";
+			break;
+	}
 	
 	return cell;
 	
