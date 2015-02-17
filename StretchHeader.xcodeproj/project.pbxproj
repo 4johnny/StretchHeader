@@ -15,6 +15,7 @@
 		B21376091A93C708005EB4F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B21376081A93C708005EB4F3 /* Images.xcassets */; };
 		B213760C1A93C708005EB4F3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B213760A1A93C708005EB4F3 /* LaunchScreen.xib */; };
 		B21376181A93C708005EB4F3 /* StretchHeaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B21376171A93C708005EB4F3 /* StretchHeaderTests.m */; };
+		B28BD49D1A93D401001B7623 /* StretchHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B28BD49C1A93D401001B7623 /* StretchHeaderTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		B21376111A93C708005EB4F3 /* StretchHeaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StretchHeaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21376161A93C708005EB4F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B21376171A93C708005EB4F3 /* StretchHeaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StretchHeaderTests.m; sourceTree = "<group>"; };
+		B28BD49B1A93D401001B7623 /* StretchHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StretchHeaderTableViewCell.h; sourceTree = "<group>"; };
+		B28BD49C1A93D401001B7623 /* StretchHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StretchHeaderTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 				B21375FD1A93C708005EB4F3 /* AppDelegate.m */,
 				B21375FF1A93C708005EB4F3 /* MasterViewController.h */,
 				B21376001A93C708005EB4F3 /* MasterViewController.m */,
+				B28BD49B1A93D401001B7623 /* StretchHeaderTableViewCell.h */,
+				B28BD49C1A93D401001B7623 /* StretchHeaderTableViewCell.m */,
 				B21376021A93C708005EB4F3 /* DetailViewController.h */,
 				B21376031A93C708005EB4F3 /* DetailViewController.m */,
 				B21376051A93C708005EB4F3 /* Main.storyboard */,
@@ -224,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B28BD49D1A93D401001B7623 /* StretchHeaderTableViewCell.m in Sources */,
 				B21375FE1A93C708005EB4F3 /* AppDelegate.m in Sources */,
 				B21376011A93C708005EB4F3 /* MasterViewController.m in Sources */,
 				B21375FB1A93C708005EB4F3 /* main.m in Sources */,
@@ -420,6 +426,7 @@
 				B213761D1A93C708005EB4F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B213761E1A93C708005EB4F3 /* Build configuration list for PBXNativeTarget "StretchHeaderTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +435,7 @@
 				B21376201A93C708005EB4F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
