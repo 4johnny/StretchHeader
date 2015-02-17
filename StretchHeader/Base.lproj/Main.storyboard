@@ -79,6 +79,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="j8t-8j-Xo2">
+                            <rect key="frame" x="0.0" y="64" width="600" height="91"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-header" translatesAutoresizingMaskIntoConstraints="NO" id="lVk-mP-Ftd">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="91"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="lVk-mP-Ftd" secondAttribute="trailing" id="1PW-R3-uOJ"/>
+                                <constraint firstItem="lVk-mP-Ftd" firstAttribute="top" secondItem="j8t-8j-Xo2" secondAttribute="top" id="5M8-85-EqQ"/>
+                                <constraint firstItem="lVk-mP-Ftd" firstAttribute="leading" secondItem="j8t-8j-Xo2" secondAttribute="leading" id="8hX-XY-Vem"/>
+                                <constraint firstAttribute="bottom" secondItem="lVk-mP-Ftd" secondAttribute="bottom" id="EFm-Ri-gYn"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="stretchHeaderTableViewCell" rowHeight="110" id="WCw-Qf-5nD" customClass="StretchHeaderTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -151,9 +167,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLD-UC-DBI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-45" y="129"/>
+            <point key="canvasLocation" x="-38" y="129"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bg-header" width="1242" height="825"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>

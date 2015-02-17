@@ -51,6 +51,8 @@
 
 	// Load data model
 	self.newsItems = [NSMutableArray arrayWithArray:[self loadModel]];
+	
+	[UIApplication sharedApplication].statusBarHidden = YES;
 }
 
 
@@ -60,11 +62,11 @@
 }
 
 
-- (BOOL)prefersStatusBarHidden {
-	
-	[self setNeedsStatusBarAppearanceUpdate];
-	return YES;
-}
+//- (BOOL)prefersStatusBarHidden {
+//	
+//	[self setNeedsStatusBarAppearanceUpdate];
+//	return YES;
+//}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
