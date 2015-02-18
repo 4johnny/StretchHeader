@@ -12,5 +12,7 @@
 
 @interface MasterViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
 @end
 

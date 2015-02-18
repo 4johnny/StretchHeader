@@ -53,6 +53,10 @@
 	self.newsItems = [NSMutableArray arrayWithArray:[self loadModel]];
 	
 	[UIApplication sharedApplication].statusBarHidden = YES;
+
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	dateFormatter.dateFormat = @"MMMM d";
+	self.dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
 }
 
 
@@ -95,7 +99,7 @@
 }
 
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 	return UITableViewAutomaticDimension;
 }
