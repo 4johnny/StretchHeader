@@ -12,14 +12,36 @@
 #import "NewsItem.h"
 
 
+#
+# pragma mark - Interface
+#
+
+
 @interface MasterViewController ()
+
+#
+# pragma mark Properties
+#
 
 @property (nonatomic) NSMutableArray* newsItems;
 
 @end
 
 
+#
+# pragma mark - Implementation
+#
+
+
 @implementation MasterViewController
+
+
+static const int kTableHeaderHeight = 350; // points
+
+
+#
+# pragma mark NSObject(UINibLoadingAdditions)
+#
 
 
 - (void)awakeFromNib {
@@ -31,7 +53,10 @@
 }
 
 
+#
 # pragma mark UIViewController
+#
+
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -43,20 +68,29 @@
 //	self.navigationItem.rightBarButtonItem = addButton;
 //	self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 
-	// Stretch table rows to fit content
+	
+	// Load data model
+	self.newsItems = [NSMutableArray arrayWithArray:[self loadModel]];
+	
+	// Size table rows to fit content
 	self.tableView.rowHeight = UITableViewAutomaticDimension;
 	
 	// Hide navigation bar
 	self.navigationController.navigationBar.hidden = YES;
 
-	// Load data model
-	self.newsItems = [NSMutableArray arrayWithArray:[self loadModel]];
-	
+	// Hide status bar
 	[UIApplication sharedApplication].statusBarHidden = YES;
 
+	// Load header programmatically, since table view manages frame of its table header
+	self.tableView.tableHeaderView = nil;
+	[self.tableView addSubview:self.headerView];
+	
+	// Put today's date in header
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	dateFormatter.dateFormat = @"MMMM d";
 	self.dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
+	
+	[self updateHeaderView];
 }
 
 
@@ -90,18 +124,14 @@
 }
 
 
-#pragma mark - Table View
+#
+# pragma mark <UITableViewDataSource>
+#
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	
 	return 1;
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-	return UITableViewAutomaticDimension;
 }
 
 
@@ -148,30 +178,54 @@
 }
 
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//	
+//	// Return NO if you do not want the specified item to be editable.
+//	return YES;
+//}
+
+
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//	
+//	if (editingStyle == UITableViewCellEditingStyleDelete) {
+//		
+//	    [self.newsItems removeObjectAtIndex:indexPath.row];
+//	    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//		
+//	} else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//		
+//	    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+//	}
+//}
+
+
+#
+# pragma mark <UITableViewDelegate>
+#
+
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	// Return NO if you do not want the specified item to be editable.
-	return YES;
+	return UITableViewAutomaticDimension;
 }
 
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+#
+# pragma mark <UIScrollViewDelegate>
+#
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	
-	if (editingStyle == UITableViewCellEditingStyleDelete) {
-		
-	    [self.newsItems removeObjectAtIndex:indexPath.row];
-	    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-		
-	} else if (editingStyle == UITableViewCellEditingStyleInsert) {
-		
-	    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-	}
+	[self updateHeaderView];
 }
 
 
+#
 # pragma mark Helpers
+#
 
-
+#
 //- (void)insertNewObject:(id)sender {
 //	
 //	if (!self.newsItems) {
@@ -196,6 +250,23 @@
 	  [NewsItem newsItemWithCategory:Category_World andHeadline:@"South Africa in $40 billion deal for Russian nuclear reactors"],
 	  [NewsItem newsItemWithCategory:Category_Europe andHeadline:@"'One million babies' created by EU student exchanges"]
 	  ];
+}
+
+
+- (void)updateHeaderView {
+	
+	CGRect frame = self.headerView.frame;
+
+	if (self.tableView.contentOffset.y < -kTableHeaderHeight) {
+		
+		int contentOffsetY = self.tableView.contentOffset.y;
+		self.headerView.frame = CGRectMake(frame.origin.x, contentOffsetY, frame.size.width, (-contentOffsetY));
+		
+	} else {
+
+		self.headerView.frame = CGRectMake(frame.origin.x, -kTableHeaderHeight, frame.size.width, frame.size.height);
+		self.tableView.contentInset = UIEdgeInsetsMake(kTableHeaderHeight, 0, 0, 0);
+	}
 }
 
 

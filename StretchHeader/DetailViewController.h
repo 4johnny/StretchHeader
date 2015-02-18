@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+
+#
+# pragma mark - Interface
+#
+
+
 @interface DetailViewController : UIViewController
+
+#
+# pragma mark Properties
+#
 
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;

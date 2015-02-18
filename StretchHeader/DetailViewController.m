@@ -8,13 +8,29 @@
 
 #import "DetailViewController.h"
 
+
+#
+# pragma mark - Interface
+#
+
+
 @interface DetailViewController ()
 
 @end
 
+
+#
+# pragma mark - Implementation
+#
+
+
 @implementation DetailViewController
 
-#pragma mark - Managing the detail item
+
+#
+# pragma mark Property Accessors
+#
+
 
 - (void)setDetailItem:(id)newDetailItem {
 	if (_detailItem != newDetailItem) {
@@ -25,12 +41,11 @@
 	}
 }
 
-- (void)configureView {
-	// Update the user interface for the detail item.
-	if (self.detailItem) {
-	    self.detailDescriptionLabel.text = [self.detailItem description];
-	}
-}
+
+#
+# pragma mark UIViewController
+#
+
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -38,9 +53,24 @@
 	[self configureView];
 }
 
+
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
 }
+
+
+#
+# pragma mark Helpers
+#
+
+
+- (void)configureView {
+	// Update the user interface for the detail item.
+	if (self.detailItem) {
+		self.detailDescriptionLabel.text = [self.detailItem description];
+	}
+}
+
 
 @end

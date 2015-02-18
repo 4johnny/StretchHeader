@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@class DetailViewController;
+#
+# pragma mark - Interface
+#
 
-@interface MasterViewController : UITableViewController
+@interface MasterViewController : UITableViewController <UIScrollViewDelegate>
 
+#
+# pragma mark Properties
+#
+
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end

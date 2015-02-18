@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#
+# pragma mark - Interface
+#
+
 @interface StretchHeaderTableViewCell : UITableViewCell
+
+#
+# pragma mark Properties
+#
 
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *headlineLabel;
