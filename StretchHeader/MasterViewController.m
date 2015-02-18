@@ -81,15 +81,16 @@ static const int kTableHeaderHeight = 350; // points
 	// Hide status bar
 	[UIApplication sharedApplication].statusBarHidden = YES;
 
-	// Load header programmatically, since table view manages frame of its table header
-	self.tableView.tableHeaderView = nil;
-	[self.tableView addSubview:self.headerView];
-	
 	// Put today's date in header
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	dateFormatter.dateFormat = @"MMMM d";
 	self.dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
 	
+	// Load header programmatically, since table view manages frame of its table header
+	self.tableView.tableHeaderView = nil;
+	[self.tableView addSubview:self.headerView];
+	self.tableView.contentInset = UIEdgeInsetsMake(kTableHeaderHeight, 0, 0, 0);
+	self.tableView.contentOffset = CGPointMake(0, -kTableHeaderHeight);
 	[self updateHeaderView];
 }
 
@@ -255,18 +256,10 @@ static const int kTableHeaderHeight = 350; // points
 
 - (void)updateHeaderView {
 	
-	CGRect frame = self.headerView.frame;
+	CGFloat headerFrameWidth = self.tableView.bounds.size.width;
+	CGFloat headerFrameHeight = MAX(kTableHeaderHeight, -self.tableView.contentOffset.y);
 
-	if (self.tableView.contentOffset.y < -kTableHeaderHeight) {
-		
-		int contentOffsetY = self.tableView.contentOffset.y;
-		self.headerView.frame = CGRectMake(frame.origin.x, contentOffsetY, frame.size.width, (-contentOffsetY));
-		
-	} else {
-
-		self.headerView.frame = CGRectMake(frame.origin.x, -kTableHeaderHeight, frame.size.width, frame.size.height);
-		self.tableView.contentInset = UIEdgeInsetsMake(kTableHeaderHeight, 0, 0, 0);
-	}
+	self.headerView.frame = CGRectMake(0, -headerFrameHeight, headerFrameWidth, headerFrameHeight);
 }
 
 
